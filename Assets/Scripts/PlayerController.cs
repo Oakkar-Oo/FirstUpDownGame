@@ -9,6 +9,12 @@ public class playerController : MonoBehaviour
     private Vector2 input;
 
     public float moveSpeed;
+    Animator animator;
+
+    public void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     void Start()
     {
@@ -23,8 +29,12 @@ public class playerController : MonoBehaviour
             input.x = Input.GetAxisRaw("Horizontal");
             input.y = Input.GetAxisRaw("Vertical");
 
+            
+
             if(input != Vector2.zero)
             {
+                animator.SetFloat("moveX", input.x);
+                animator.SetFloat("moveY", input.y);
                 var targetPos = transform.position;
                 targetPos.x += input.x;
                 targetPos.y += input.y;
