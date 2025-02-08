@@ -4,6 +4,9 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     
+    
+
+
     public bool isMoving;
 
     private Vector2 input;
@@ -11,14 +14,21 @@ public class playerController : MonoBehaviour
     public float moveSpeed;
     Animator animator;
 
+    private bool isAttacking = false;
+    private GameObject attackArea = default;    
+
+    private float timeToAttack = 025f;
+    private float timer = 05f;
     public void Awake()
     {
+
         animator = GetComponent<Animator>();
     }
 
     void Start()
     {
         
+        attackArea = transform.GetChild(0).gameObject;
     }
 
     
@@ -26,6 +36,7 @@ public class playerController : MonoBehaviour
     {
         if(!isMoving)
         {
+            
             input.x = Input.GetAxisRaw("Horizontal");
             input.y = Input.GetAxisRaw("Vertical");
 
@@ -43,10 +54,13 @@ public class playerController : MonoBehaviour
 
             }
         }
+        animator.SetBool("isMoving", isMoving);
+        
     }
 
     IEnumerator Move(Vector3 targetPos)
     {
+        
         isMoving = true;
         while((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
         {
@@ -56,5 +70,6 @@ public class playerController : MonoBehaviour
         }
         transform.position = targetPos;
         isMoving = false;
+        
     }
 }
