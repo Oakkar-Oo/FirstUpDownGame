@@ -1,12 +1,9 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class playerController : MonoBehaviour
 {
-    
-    
-
-
     public bool isMoving;
 
     private Vector2 input;
@@ -14,11 +11,7 @@ public class playerController : MonoBehaviour
     public float moveSpeed;
     Animator animator;
 
-    private bool isAttacking = false;
-    private GameObject attackArea = default;    
-
-    private float timeToAttack = 025f;
-    private float timer = 05f;
+    
     public void Awake()
     {
 
@@ -28,7 +21,7 @@ public class playerController : MonoBehaviour
     void Start()
     {
         
-        attackArea = transform.GetChild(0).gameObject;
+        
     }
 
     
@@ -55,6 +48,7 @@ public class playerController : MonoBehaviour
             }
         }
         animator.SetBool("isMoving", isMoving);
+
         
     }
 
@@ -72,4 +66,6 @@ public class playerController : MonoBehaviour
         isMoving = false;
         
     }
+
+    
 }
